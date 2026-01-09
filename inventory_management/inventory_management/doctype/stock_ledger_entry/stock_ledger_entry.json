@@ -6,13 +6,13 @@
  "engine": "InnoDB",
  "field_order": [
   "section_break_sbcc",
-  "date",
-  "time",
+  "time_stamp",
   "product",
   "warehouse",
   "quantity_change",
   "incomming_valuation",
-  "ma_valuation"
+  "ma_valuation",
+  "amended_from"
  ],
  "fields": [
   {
@@ -20,21 +20,12 @@
    "fieldtype": "Section Break"
   },
   {
-   "fieldname": "date",
-   "fieldtype": "Date",
-   "label": "Date"
-  },
-  {
-   "fieldname": "time",
-   "fieldtype": "Time",
-   "label": "Time"
-  },
-  {
    "fieldname": "product",
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Product",
    "options": "Product",
+   "read_only": 1,
    "reqd": 1
   },
   {
@@ -43,28 +34,48 @@
    "in_list_view": 1,
    "label": "Warehouse",
    "options": "Warehouse",
+   "read_only": 1,
    "reqd": 1
   },
   {
    "fieldname": "quantity_change",
    "fieldtype": "Int",
-   "label": "Quantity Change"
+   "label": "Quantity Change",
+   "read_only": 1
   },
   {
    "fieldname": "incomming_valuation",
    "fieldtype": "Float",
-   "label": "Incomming Valuation"
+   "label": "Incomming Valuation",
+   "read_only": 1
   },
   {
    "fieldname": "ma_valuation",
    "fieldtype": "Float",
-   "label": "Moving Average Valuation"
+   "label": "Moving Average Valuation",
+   "read_only": 1
+  },
+  {
+   "fieldname": "time_stamp",
+   "fieldtype": "Datetime",
+   "label": "Time Stamp",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Stock Ledger Entry",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-01-08 14:23:57.225979",
+ "modified": "2026-01-09 12:51:33.552421",
  "modified_by": "Administrator",
  "module": "Inventory Management",
  "name": "Stock Ledger Entry",

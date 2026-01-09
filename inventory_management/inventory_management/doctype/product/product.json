@@ -8,8 +8,7 @@
  "field_order": [
   "section_break_zdzs",
   "product_image",
-  "product_name",
-  "initial_valuation"
+  "product_name"
  ],
  "fields": [
   {
@@ -24,11 +23,6 @@
    "reqd": 1
   },
   {
-   "fieldname": "initial_valuation",
-   "fieldtype": "Float",
-   "label": "Initial Valuation"
-  },
-  {
    "fieldname": "product_image",
    "fieldtype": "Attach Image",
    "label": "Product Image"
@@ -38,7 +32,7 @@
  "image_field": "product_image",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-01-08 14:29:51.077702",
+ "modified": "2026-01-09 12:19:38.697891",
  "modified_by": "Administrator",
  "module": "Inventory Management",
  "name": "Product",

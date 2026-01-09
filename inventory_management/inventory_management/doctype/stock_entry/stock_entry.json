@@ -69,8 +69,9 @@
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2026-01-08 15:19:40.337734",
+ "modified": "2026-01-09 14:46:58.884446",
  "modified_by": "Administrator",
  "module": "Inventory Management",
  "name": "Stock Entry",
@@ -85,6 +86,7 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "select": 1,
    "share": 1,
    "write": 1
   }

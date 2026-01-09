@@ -28,8 +28,6 @@
    "label": "Quantity"
   },
   {
-   "fetch_from": "product.initial_valuation",
-   "fetch_if_empty": 1,
    "fieldname": "valuation",
    "fieldtype": "Currency",
    "label": "Valuation"
@@ -39,7 +37,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-01-08 14:56:37.551070",
+ "modified": "2026-01-09 12:32:51.591812",
  "modified_by": "Administrator",
  "module": "Inventory Management",
  "name": "Items",

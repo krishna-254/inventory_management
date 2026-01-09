@@ -3,6 +3,6 @@
 
 // frappe.ui.form.on("Stock Ledger Entry", {
 // 	refresh(frm) {
-
 // 	},
 // });
+
