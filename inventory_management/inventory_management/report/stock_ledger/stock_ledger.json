@@ -1,0 +1,94 @@
+{
+ "add_total_row": 0,
+ "add_translate_data": 0,
+ "columns": [
+  {
+   "fieldname": "time_stamp",
+   "fieldtype": "Datetime",
+   "label": "Time Stamp",
+   "width": 0
+  },
+  {
+   "fieldname": "product",
+   "fieldtype": "Link",
+   "label": "Product",
+   "options": "product",
+   "width": 0
+  },
+  {
+   "fieldname": "warehouse",
+   "fieldtype": "Link",
+   "label": "Warehouse",
+   "options": "warehouse",
+   "width": 0
+  },
+  {
+   "fieldname": "quantity_change",
+   "fieldtype": "Int",
+   "label": "Quantity Change",
+   "width": 0
+  },
+  {
+   "fieldname": "incomming_valuation",
+   "fieldtype": "Currency",
+   "label": "Incomming Valuation",
+   "width": 0
+  }
+ ],
+ "creation": "2026-01-09 14:49:36.215748",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [
+  {
+   "fieldname": "product",
+   "fieldtype": "Link",
+   "label": "Product",
+   "mandatory": 0,
+   "options": "product",
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "warehouse",
+   "fieldtype": "Link",
+   "label": "Warehouse",
+   "mandatory": 0,
+   "options": "warehouse",
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "from_datetime",
+   "fieldtype": "Datetime",
+   "label": "From",
+   "mandatory": 0,
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "to_datetime",
+   "fieldtype": "Datetime",
+   "label": "To",
+   "mandatory": 0,
+   "wildcard_filter": 0
+  }
+ ],
+ "idx": 0,
+ "is_standard": "Yes",
+ "json": "{}",
+ "letter_head": null,
+ "modified": "2026-01-12 14:21:33.296542",
+ "modified_by": "Administrator",
+ "module": "Inventory Management",
+ "name": "Stock Ledger",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "ref_doctype": "Stock Ledger Entry",
+ "report_name": "Stock Ledger",
+ "report_script": "\nledger = frappe.qb.DocType(\"Stock Ledger Entry\")\nquery = frappe.qb.from_(ledger)\n\nquery = query.select(\n\tledger.time_stamp,\n\tledger.product,\n\tledger.warehouse,\n\tledger.quantity_change,\n\tledger.incomming_valuation\n# \tledger.name,\n)\n\nresult = query.run(as_list=True)",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "System Manager"
+  }
+ ],
+ "timeout": 0
+}
