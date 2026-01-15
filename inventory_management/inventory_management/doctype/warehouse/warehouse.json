@@ -12,7 +12,9 @@
   "rgt",
   "is_group",
   "old_parent",
-  "parent_warehouse"
+  "parent_warehouse",
+  "warehouse_address",
+  "warehouse_location"
  ],
  "fields": [
   {
@@ -60,13 +62,23 @@
    "in_list_view": 1,
    "label": "Warehouse Name",
    "reqd": 1
+  },
+  {
+   "fieldname": "warehouse_address",
+   "fieldtype": "Markdown Editor",
+   "label": "Warehouse Address"
+  },
+  {
+   "fieldname": "warehouse_location",
+   "fieldtype": "Geolocation",
+   "label": "Warehouse Location"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2026-01-08 11:33:43.092016",
+ "modified": "2026-01-15 23:22:54.796168",
  "modified_by": "Administrator",
  "module": "Inventory Management",
  "name": "Warehouse",

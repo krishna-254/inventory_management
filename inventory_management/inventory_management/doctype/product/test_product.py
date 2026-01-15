@@ -15,36 +15,56 @@ IGNORE_TEST_RECORD_DEPENDENCIES = []  # eg. ["User"]
 
 class IntegrationTestProduct(IntegrationTestCase):
     def setUp(self):
-        # Generate a unique suffix for this test run to avoid name collisions
-        self.test_product_name = "Test Product"
+        # Unique name per test method to avoid collisions
+        self.test_product_name = f"Test Product {self._testMethodName}"
 
     def test_naming_series_logic(self):
-        """Check if PR.##### naming is applied without affecting existing items"""
+        """Check if PR.##### naming is applied and product is saved."""
         product = frappe.get_doc({
             "doctype": "Product",
-            "product_name": self.test_product_name
+            "product_name": self.test_product_name,
         }).insert()
-        
+
         # Verify the naming series pattern
-        self.assertTrue(product.name.startswith("PR"))
-        
-        # Verify the name is what we assigned
+        self.assertTrue(product.name.startswith("PR."))
+        # Verify the product_name was set
         self.assertEqual(product.product_name, self.test_product_name)
 
     def test_data_integrity(self):
-        """Ensure the created test item exists independently"""
-        product = frappe.get_doc({
-            "doctype": "Product",
-            "product_name": self.test_product_name
-        }).insert()
-
-        # Fetch from database to ensure it saved correctly
+        """Ensure the created test product exists in DB."""
+        product = frappe.get_doc({"doctype": "Product", "product_name": self.test_product_name}).insert()
         db_name = frappe.db.get_value("Product", {"product_name": self.test_product_name}, "name")
         self.assertEqual(db_name, product.name)
 
+    def test_create_update_delete_product(self):
+        """Create a product, update its name, and delete it."""
+        # Create
+        p = frappe.get_doc({"doctype": "Product", "product_name": self.test_product_name})
+        p.insert()
+        self.assertTrue(frappe.db.exists("Product", p.name))
+
+        # Update
+        p.product_name = self.test_product_name + " Updated"
+        p.save()
+        updated = frappe.get_doc("Product", p.name)
+        self.assertEqual(updated.product_name, self.test_product_name + " Updated")
+
+        # Delete
+        frappe.delete_doc("Product", p.name)
+        self.assertFalse(frappe.db.exists("Product", p.name))
+
+    def test_mandatory_field_validation(self):
+        """Inserting Product without required `product_name` should raise MandatoryError."""
+        doc = frappe.get_doc({"doctype": "Product"})
+        self.assertRaises(frappe.MandatoryError, doc.insert)
+
     def tearDown(self):
-        """
-        Optional: Specifically remove only the items created by this test 
-        to keep the database clean without touching pre-existing data.
-        """
-        frappe.db.delete("Product", {"product_name": self.test_product_name})
+        # Clean up any products created during tests
+        try:
+            frappe.db.delete("Product", {"product_name": self.test_product_name})
+        except Exception:
+            pass
+        try:
+            frappe.db.delete("Product", {"product_name": self.test_product_name + " Updated"})
+        except Exception:
+            pass

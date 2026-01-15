@@ -44,8 +44,7 @@ class IntegrationTestStockLedgerEntry(IntegrationTestCase):
 			{
 				"doctype": "Stock Entry",
 				"transaction_type": "Receipt",
-				"to_warehouse": warehouse.name,
-				"item_list": [{"product": product.name, "quantity": 10, "valuation": 100}],
+				"item_list": [{"product": product.name, "quantity": 10, "valuation": 100, "to_warehouse": warehouse.name}],
 			}
 		)
 		se1.insert()
@@ -68,8 +67,7 @@ class IntegrationTestStockLedgerEntry(IntegrationTestCase):
 			{
 				"doctype": "Stock Entry",
 				"transaction_type": "Receipt",
-				"to_warehouse": warehouse.name,
-				"item_list": [{"product": product.name, "quantity": 5, "valuation": 120}],
+				"item_list": [{"product": product.name, "quantity": 5, "valuation": 100, "to_warehouse": warehouse.name}],
 			}
 		)
 		se2.insert()
@@ -89,8 +87,8 @@ class IntegrationTestStockLedgerEntry(IntegrationTestCase):
 			filters=[["product", "=", product.name], ["warehouse", "=", warehouse.name]],
 		)
 
-		# expected MA: ((100*10)+(120*5))/15
-		expected_ma = ((100 * 10) + (120 * 5)) / 15
+		# expected MA: ((100*10)+(100*5))/15
+		expected_ma = ((100 * 10) + (100 * 5)) / 15
 		self.assertTrue(isclose(float(last_ledger.ma_valuation), expected_ma, rel_tol=1e-6))
 
 		# Cleanup

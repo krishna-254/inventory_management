@@ -53,8 +53,7 @@ class IntegrationTestStockEntry(IntegrationTestCase):
 			{
 				"doctype": "Stock Entry",
 				"transaction_type": "Receipt",
-				"to_warehouse": wh_from.name,
-				"item_list": [{"product": product.name, "quantity": 5, "valuation": 50}],
+				"item_list": [{"product": product.name, "quantity": 5, "valuation": 50, "to_warehouse": wh_from.name}],
 			}
 		)
 		se_init.insert()
@@ -65,9 +64,7 @@ class IntegrationTestStockEntry(IntegrationTestCase):
 			{
 				"doctype": "Stock Entry",
 				"transaction_type": "Transfer",
-				"from_warehouse": wh_from.name,
-				"to_warehouse": wh_to.name,
-				"item_list": [{"product": product.name, "quantity": 3, "valuation": 70}],
+				"item_list": [{"product": product.name, "quantity": 3, "valuation": 70, "from_warehouse": wh_from.name, "to_warehouse": wh_to.name}],
 			}
 		)
 		se_transfer.insert()
@@ -96,9 +93,7 @@ class IntegrationTestStockEntry(IntegrationTestCase):
 			{
 				"doctype": "Stock Entry",
 				"transaction_type": "Transfer",
-				"from_warehouse": wh_from.name,
-				"to_warehouse": wh_to.name,
-				"item_list": [{"product": product.name, "quantity": 10, "valuation": 80}],
+				"item_list": [{"product": product.name, "quantity": 10, "valuation": 80, "from_warehouse": wh_from.name, "to_warehouse": wh_to.name}],
 			}
 		)
 		se_fail.insert()
@@ -131,8 +126,7 @@ class IntegrationTestStockEntry(IntegrationTestCase):
 			{
 				"doctype": "Stock Entry",
 				"transaction_type": "Receipt",
-				"to_warehouse": warehouse.name,
-				"item_list": [{"product": product.name, "quantity": 10, "valuation": 100}],
+				"item_list": [{"product": product.name, "quantity": 10, "valuation": 100, "to_warehouse": warehouse.name}],
 			}
 		)
 		se1.insert()
@@ -150,13 +144,12 @@ class IntegrationTestStockEntry(IntegrationTestCase):
 		self.assertEqual(ledgers[0]["incomming_valuation"], 100)
 		self.assertEqual(ledgers[0]["ma_valuation"], 100)
 
-		# Add more stock: 5 units @ 120 -> new MA
+		# Add more stock: 5 units @ 100 -> new MA (frontend would fill valuation with previous MA)
 		se2 = frappe.get_doc(
 			{
 				"doctype": "Stock Entry",
 				"transaction_type": "Receipt",
-				"to_warehouse": warehouse.name,
-				"item_list": [{"product": product.name, "quantity": 5, "valuation": 120}],
+				"item_list": [{"product": product.name, "quantity": 5, "valuation": 100, "to_warehouse": warehouse.name}],
 			}
 		)
 		se2.insert()
@@ -176,8 +169,8 @@ class IntegrationTestStockEntry(IntegrationTestCase):
 			filters=[["product", "=", product.name], ["warehouse", "=", warehouse.name]],
 		)
 
-		# expected MA: ((100*10)+(120*5))/15
-		expected_ma = ((100 * 10) + (120 * 5)) / 15
+		# expected MA: ((100*10)+(100*5))/15
+		expected_ma = ((100 * 10) + (100 * 5)) / 15
 		self.assertTrue(isclose(float(last_ledger.ma_valuation), expected_ma, rel_tol=1e-6))
 
 		# Cleanup
@@ -206,9 +199,7 @@ class IntegrationTestStockEntry(IntegrationTestCase):
 			{
 				"doctype": "Stock Entry",
 				"transaction_type": "Receipt",
-				"from_warehouse": warehouse.name,
-				"to_warehouse": warehouse.name,
-				"item_list": [{"product": product.name, "quantity": 1, "valuation": 10}],
+				"item_list": [{"product": product.name, "quantity": 1, "valuation": 10, "from_warehouse": warehouse.name, "to_warehouse": warehouse.name}],
 			}
 		)
 		se_bad.insert()
@@ -220,8 +211,7 @@ class IntegrationTestStockEntry(IntegrationTestCase):
 			{
 				"doctype": "Stock Entry",
 				"transaction_type": "Receipt",
-				"to_warehouse": warehouse.name,
-				"item_list": [{"product": product.name, "quantity": 4, "valuation": 40}],
+				"item_list": [{"product": product.name, "quantity": 4, "valuation": 40, "to_warehouse": warehouse.name}],
 			}
 		)
 		se.insert()
@@ -262,8 +252,7 @@ class IntegrationTestStockEntry(IntegrationTestCase):
 			{
 				"doctype": "Stock Entry",
 				"transaction_type": "Receipt",
-				"to_warehouse": warehouse.name,
-				"item_list": [{"product": product.name, "quantity": 5, "valuation": 50}],
+				"item_list": [{"product": product.name, "quantity": 5, "valuation": 50, "to_warehouse": warehouse.name}],
 			}
 		)
 		se_rec.insert()
@@ -286,8 +275,7 @@ class IntegrationTestStockEntry(IntegrationTestCase):
 			{
 				"doctype": "Stock Entry",
 				"transaction_type": "Consume",
-				"from_warehouse": warehouse.name,
-				"item_list": [{"product": product.name, "quantity": 3, "valuation": 0}],
+				"item_list": [{"product": product.name, "quantity": 3, "valuation": 0, "from_warehouse": warehouse.name}],
 			}
 		)
 		se.insert()

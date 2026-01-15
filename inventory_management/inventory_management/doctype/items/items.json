@@ -32,6 +32,19 @@
    "fieldtype": "Currency",
    "label": "Valuation"
   }
+    ,
+    {
+     "fieldname": "from_warehouse",
+     "fieldtype": "Link",
+     "label": "From Warehouse",
+     "options": "Warehouse"
+    },
+    {
+     "fieldname": "to_warehouse",
+     "fieldtype": "Link",
+     "label": "To Warehouse",
+     "options": "Warehouse"
+    }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,

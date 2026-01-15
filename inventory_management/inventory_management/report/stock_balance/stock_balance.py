@@ -77,8 +77,10 @@ def get_data(filters: dict) -> list[list]:
 		)
 
 	if filters.get("warehouse"):
+		child_warehouses = frappe.get_all("Warehouse", {"name":("descendants of", filters.get("warehouse"))}, pluck="name")
+		child_warehouses.append(filters.get("warehouse"))
 		query = query.where(
-			ledger.warehouse == filters.get("warehouse")
+			ledger.warehouse.isin(child_warehouses)
 		)
 	
 	if filters.get("product"):
