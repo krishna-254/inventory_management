@@ -45,11 +45,11 @@ class StockEntry(Document):
 				from_wh = _item_from_wh(item)
 				if from_wh:
 					frappe.throw("`from_warehouse` must be empty for Receipt transactions (use item-level to_warehouse only)")
-				if not to_wh and not self.to_warehouse:
+				if not to_wh:
 					frappe.throw("`to_warehouse` must be set for Receipt transactions (at item row or document)")
 				if to_wh:
 					self._validate_warehouse_exists_and_is_not_group(to_wh)
-			if not item_list and not self.to_warehouse:
+			if not item_list:
 				frappe.throw("`to_warehouse` must be set for Receipt transactions")
 
 		elif tt == "Consume":
@@ -58,11 +58,11 @@ class StockEntry(Document):
 				to_wh = _item_to_wh(item)
 				if to_wh:
 					frappe.throw("`to_warehouse` must be empty for Consume transactions (use item-level from_warehouse only)")
-				if not from_wh and not self.from_warehouse:
+				if not from_wh:
 					frappe.throw("`from_warehouse` must be set for Consume transactions (at item row or document)")
 				if from_wh:
 					self._validate_warehouse_exists_and_is_not_group(from_wh)
-			if not item_list and not self.from_warehouse:
+			if not item_list:
 				frappe.throw("`from_warehouse` must be set for Consume transactions")
 
 		elif tt == "Transfer":
@@ -70,24 +70,14 @@ class StockEntry(Document):
 				from_wh = _item_from_wh(item)
 				to_wh = _item_to_wh(item)
 				# allow fallback to document-level if item doesn't specify
-				from_wh = from_wh or self.from_warehouse
-				to_wh = to_wh or self.to_warehouse
+				from_wh = from_wh
+				to_wh = to_wh
 				if not from_wh or not to_wh:
 					frappe.throw("Both `from_warehouse` and `to_warehouse` must be set for Transfer transactions (at item row or document)")
 				if from_wh == to_wh:
 					frappe.throw("`from_warehouse` and `to_warehouse` must be different for Transfer transactions")
 				self._validate_warehouse_exists_and_is_not_group(from_wh)
 				self._validate_warehouse_exists_and_is_not_group(to_wh)
-
-		else:
-			# For other/unknown types, validate any provided warehouses on items or document
-			for item in item_list:
-				from_wh = _item_from_wh(item) or self.from_warehouse
-				to_wh = _item_to_wh(item) or self.to_warehouse
-				if from_wh:
-					self._validate_warehouse_exists_and_is_not_group(from_wh)
-				if to_wh:
-					self._validate_warehouse_exists_and_is_not_group(to_wh)
 
 	def _validate_warehouse_exists_and_is_not_group(self, warehouse_name):
 		if not warehouse_name:
@@ -108,7 +98,7 @@ class StockEntry(Document):
 				item_from_wh = item.get("from_warehouse")
 			else:
 				item_from_wh = getattr(item, "from_warehouse", None)
-			warehouse_to_check = item_from_wh or self.from_warehouse
+			warehouse_to_check = item_from_wh
 			if not warehouse_to_check:
 				continue
 			warehouse_qty = get_warehouse_product_qty(warehouse_to_check, item.product)
@@ -132,8 +122,8 @@ class StockEntry(Document):
 		else:
 			item_from_wh = getattr(item, "from_warehouse", None)
 			item_to_wh = getattr(item, "to_warehouse", None)
-		from_wh = item_from_wh or self.from_warehouse
-		to_wh = item_to_wh or self.to_warehouse
+		from_wh = item_from_wh
+		to_wh = item_to_wh
 
 		if from_wh:
 			from_ledger = frappe.new_doc("Stock Ledger Entry")
@@ -142,12 +132,16 @@ class StockEntry(Document):
 			from_ledger.warehouse = from_wh
 			from_ledger.product = item.product
 			from_ledger.quantity_change = -item.quantity
+			from_ledger.ma_valuation = 0
+			from_ledger.transaction_type = self.transaction_type
 			from_ledger.incomming_valuation = 0
 			from_ledger.insert()
 
 		if to_wh:
 			to_ledger = frappe.new_doc("Stock Ledger Entry")
 			to_ledger.time_stamp = frappe.utils.now()
+
+			to_ledger.transaction_type = self.transaction_type
 
 			to_ledger.warehouse = to_wh
 			to_ledger.product = item.product

@@ -11,9 +11,12 @@
   "lft",
   "rgt",
   "is_group",
+  "column_break_fjki",
   "old_parent",
   "parent_warehouse",
+  "section_break_i1ai",
   "warehouse_address",
+  "column_break_izns",
   "warehouse_location"
  ],
  "fields": [
@@ -65,20 +68,32 @@
   },
   {
    "fieldname": "warehouse_address",
-   "fieldtype": "Markdown Editor",
+   "fieldtype": "Text",
    "label": "Warehouse Address"
   },
   {
    "fieldname": "warehouse_location",
    "fieldtype": "Geolocation",
    "label": "Warehouse Location"
+  },
+  {
+   "fieldname": "section_break_i1ai",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_izns",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_fjki",
+   "fieldtype": "Column Break"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2026-01-15 23:22:54.796168",
+ "modified": "2026-01-16 14:10:52.788131",
  "modified_by": "Administrator",
  "module": "Inventory Management",
  "name": "Warehouse",

@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "SE.#####",
  "creation": "2026-01-08 11:49:33.487183",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -47,10 +48,11 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-01-15 23:25:30.112286",
+ "modified": "2026-01-16 12:50:50.773386",
  "modified_by": "Administrator",
  "module": "Inventory Management",
  "name": "Stock Entry",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {

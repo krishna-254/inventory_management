@@ -8,7 +8,8 @@
  "field_order": [
   "section_break_zdzs",
   "product_image",
-  "product_name"
+  "product_name",
+  "product_description"
  ],
  "fields": [
   {
@@ -26,13 +27,18 @@
    "fieldname": "product_image",
    "fieldtype": "Attach Image",
    "label": "Product Image"
+  },
+  {
+   "fieldname": "product_description",
+   "fieldtype": "Long Text",
+   "label": "Product Description"
   }
  ],
  "grid_page_length": 50,
  "image_field": "product_image",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-01-09 12:19:38.697891",
+ "modified": "2026-01-16 12:50:05.876929",
  "modified_by": "Administrator",
  "module": "Inventory Management",
  "name": "Product",

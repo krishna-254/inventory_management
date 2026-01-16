@@ -84,7 +84,7 @@ function fetch_and_set_valuation(frm, cdt, cdn) {
     if (!row) return;
     const product = row.product;
     // determine warehouse to use: prefer to_warehouse, then from_warehouse
-    const warehouse = row.to_warehouse || row.from_warehouse;
+    const warehouse = row.from_warehouse;
     if (!product || !warehouse) return;
 
     frappe.db.get_list('Stock Ledger Entry', {

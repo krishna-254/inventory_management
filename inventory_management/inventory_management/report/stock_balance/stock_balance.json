@@ -1,5 +1,5 @@
 {
- "add_total_row": 0,
+ "add_total_row": 1,
  "add_translate_data": 0,
  "columns": [
   {
@@ -24,13 +24,13 @@
    "fieldname": "balance",
    "fieldtype": "Currency",
    "label": "Balance",
-   "width": 0
+   "width": 70
   },
   {
    "fieldname": "ma_valuation",
    "fieldtype": "Currency",
    "label": "Moving Average",
-   "width": 0
+   "width": 10
   }
  ],
  "creation": "2026-01-09 15:21:24.795017",
@@ -66,7 +66,7 @@
  "is_standard": "Yes",
  "json": "{}",
  "letter_head": null,
- "modified": "2026-01-09 16:45:11.773398",
+ "modified": "2026-01-16 15:24:03.013553",
  "modified_by": "Administrator",
  "module": "Inventory Management",
  "name": "Stock Balance",

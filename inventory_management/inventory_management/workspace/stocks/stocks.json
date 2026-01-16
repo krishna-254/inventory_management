@@ -1,0 +1,54 @@
+{
+ "app": "frappe",
+ "charts": [
+  {
+   "chart_name": "Transaction Count",
+   "label": "Transaction Count"
+  },
+  {
+   "chart_name": "Warehouse Stock",
+   "label": "Warehouse Stock"
+  },
+  {
+   "chart_name": "Warehouse Valuation",
+   "label": "Warehouse Valuation"
+  }
+ ],
+ "content": "[{\"id\":\"8ZkiKvvZZi\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Stocks</span>\",\"col\":12}},{\"id\":\"l8znvwlGrO\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Stocks\",\"col\":4}},{\"id\":\"rzwFqFjLh5\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Balance\",\"col\":4}},{\"id\":\"Me3s3dGDwE\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Warehouse Stock\",\"col\":6}},{\"id\":\"4NFH_jj3O_\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Transaction Count\",\"col\":6}},{\"id\":\"mqahneqRfL\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"iJSj_LEUze\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Warehouse Valuation\",\"col\":12}}]",
+ "creation": "2026-01-16 10:59:12.543593",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "stock",
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "Stocks",
+ "link_type": "DocType",
+ "links": [],
+ "modified": "2026-01-16 15:29:39.708327",
+ "modified_by": "Administrator",
+ "module": "Inventory Management",
+ "name": "Stocks",
+ "number_cards": [
+  {
+   "label": "Total Stocks",
+   "number_card_name": "Sum of Total_stock"
+  },
+  {
+   "label": "Balance",
+   "number_card_name": "Balance"
+  }
+ ],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 28.0,
+ "shortcuts": [],
+ "title": "Stocks",
+ "type": "Workspace"
+}

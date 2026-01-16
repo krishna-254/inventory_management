@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "SLE.#####",
  "creation": "2026-01-08 14:15:39.840596",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -8,6 +9,7 @@
   "section_break_sbcc",
   "time_stamp",
   "product",
+  "transaction_type",
   "warehouse",
   "quantity_change",
   "incomming_valuation",
@@ -70,15 +72,23 @@
    "print_hide": 1,
    "read_only": 1,
    "search_index": 1
+  },
+  {
+   "fieldname": "transaction_type",
+   "fieldtype": "Select",
+   "label": "Transaction Type",
+   "options": "Transfer\nReceipt\nConsume",
+   "read_only": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-01-09 12:51:33.552421",
+ "modified": "2026-01-16 13:01:21.681389",
  "modified_by": "Administrator",
  "module": "Inventory Management",
  "name": "Stock Ledger Entry",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {

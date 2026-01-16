@@ -19,14 +19,14 @@ class IntegrationTestProduct(IntegrationTestCase):
         self.test_product_name = f"Test Product {self._testMethodName}"
 
     def test_naming_series_logic(self):
-        """Check if PR.##### naming is applied and product is saved."""
+        """Check if PR##### naming is applied and product is saved."""
         product = frappe.get_doc({
             "doctype": "Product",
             "product_name": self.test_product_name,
         }).insert()
 
         # Verify the naming series pattern
-        self.assertTrue(product.name.startswith("PR."))
+        self.assertTrue(product.name.startswith("PR"))
         # Verify the product_name was set
         self.assertEqual(product.product_name, self.test_product_name)
 
